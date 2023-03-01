@@ -1,16 +1,41 @@
-let array1 = [2, 1, 7, 5];
-array1.sort(compare_function)
-console.log(array1)
+class Content_card{
 
-let array2 = ["melon", "eple", "appelsin", "ananas", "pære"];
-array2.sort()
-console.log(array2)
+    constructor(card_location){
+        this.card_location = card_location
+        //TODO: content of card can be stored in card?
+        this.card = document.createElement("div")
+    }
 
-let array3 = [2, 10, 104, 17, 82, 109];
-array3.sort(compare_function)
-console.log(array3)
+    create_content_card(){
+        this.card_location.appendChild(card)
+    }
 
+    add_image(location){}
 
-function compare_function(a, b) {
-    return a - b;
+    add_div(location){}
+
+    add_paragraph(location){}
+
+    add_button(location, action){}
+
 }
+
+function append_button(element_id, content){
+    //target element for content to be appended to
+    const target_element = document.getElementById(element_id)
+    target_element.appendChild(content)
+}
+
+function remove_button(element_id, content){
+    //target element for content to be removed from
+    const target_element = document.getElementById(element_id)
+    target_element.removeChild(content)
+}
+
+
+const skip_sang_knapp = document.createElement("button")
+const skip_sang_bilde = document.createElement("img");
+skip_sang_bilde.src = "./bilder/next_track_button_larger.png"
+skip_sang_bilde.id = ("skip_sang_bilde");
+skip_sang_knapp.removeChild(skip_sang_bilde); 
+skip_sang_knapp.addEventListener('click', () => {})
