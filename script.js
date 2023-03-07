@@ -31,17 +31,28 @@ class Content_card{
 
 }
 
-function append_button(element_id, content){
-    //target element for content to be appended to
-    const target_element = document.getElementById(element_id)
-    target_element.appendChild(content)
-}
+class Collection_content_card{
 
-function remove_button(element_id, content){
-    //target element for content to be removed from
-    const target_element = document.getElementById(element_id)
-    target_element.removeChild(content)
+    constructor(){
+        this.content_card_array = [];
+    }
+
+    append_button(element_id, content){
+        //target element for content to be appended to
+        const target_element = document.getElementById(element_id)
+        target_element.appendChild(content)
+    }
+    
+    remove_button(element_id, content){
+        //target element for content to be removed from
+        const target_element = document.getElementById(element_id)
+        target_element.removeChild(content)
+    }
 }
+//a button which when pressed creates content(an element or whatever) in a specified location
+
+
+
 
 window.onload = winInit;
 function winInit() {
