@@ -2,11 +2,8 @@
 
 class Content_card{
 
-    constructor(card_location, card_id){
+    constructor(card_id){
         //TODO: content of card can be stored in card?
-        this.card_location = card_location
-        this.location_element = document.getElementById(card_location)
-        
         this.card = document.createElement("div")
         this.card.id = card_id
     }
@@ -18,10 +15,11 @@ class Content_card{
     add_image(target_location){}
 
     add_div(target_location, div_id){
+        console.log(target_location)
         const div_location = document.getElementById(target_location)
-        console.log(div_location)
         const div = document.createElement('div')
         div.id = div_id
+        console.log(div)
         div_location.appendChild(div)
     }
 
@@ -33,33 +31,41 @@ class Content_card{
 
 class Collection_content_card{
 
-    constructor(){
+    constructor(master_location, master_id){
+        this.master = document.createElement('div')
+        this.master.id = master_id
+        this.master_location = document.getElementById(master_location)
+        console.log(this.master_location)
+        this.master_location.appendChild(this.master)
         this.content_card_array = [];
     }
 
-    append_button(element_id, content){
-        //target element for content to be appended to
-        const target_element = document.getElementById(element_id)
-        target_element.appendChild(content)
+    append_content(content_id, content){
+        //target content for content to be appended to
+        const target_content = document.getElementById(content_id)
+        this.content_card_array.push(content)
+        target_content.appendChild(content)
     }
     
-    remove_button(element_id, content){
-        //target element for content to be removed from
-        const target_element = document.getElementById(element_id)
-        target_element.removeChild(content)
+    remove_content(content_id, content){
+        //target content for content to be removed from
+        const target_content = document.getElementtById(content_id)
+        target_content.removeChild(content)
     }
 }
 //a button which when pressed creates content(an element or whatever) in a specified location
 
 
-
-
 window.onload = winInit;
 function winInit() {
-    const test_card = new Content_card("placeholder", "test_card_id")
-    test_card.create_content_card()
+    const test_collection_cards = new Collection_content_card("placeholder", "collection")
+    const test_card = new Content_card("test_card_id")
+    // test_card.create_content_card()
     test_card.add_div("test_card_id", "test_div")
+    test_collection_cards.append_content("test_card", test_card)
+    console.log(test_collection_cards)
 }
+
 
 // const skip_sang_knapp = document.createElement("button")
 // const skip_sang_bilde = document.createElement("img");
