@@ -5,7 +5,8 @@ class Content_card{
     constructor(card_id){
         //TODO: content of card can be stored in card?
         this.card = document.createElement("div")
-        this.card.id = card_id
+        this.card.classList = card_id
+        console.log(this.card, 'hjei')
     }
 
     create_content_card(){
@@ -15,12 +16,11 @@ class Content_card{
     add_image(target_location){}
 
     add_div(target_location, div_id){
-        console.log(target_location)
-        const div_location = document.getElementById(target_location)
         const div = document.createElement('div')
         div.id = div_id
-        console.log(div)
-        div_location.appendChild(div)
+
+        console.log(target_location, 'hade')
+        target_location.appendChild(div)
     }
 
     add_paragraph(target_location){}
@@ -31,20 +31,23 @@ class Content_card{
 
 class Collection_content_card{
 
-    constructor(master_location, master_id){
-        this.master = document.createElement('div')
-        this.master.id = master_id
-        this.master_location = document.getElementById(master_location)
-        console.log(this.master_location)
-        this.master_location.appendChild(this.master)
+    constructor(master_location, children_class){
+        this.master_location = master_location
+        this.child = document.createElement('div')
+        this.child.classList = children_class
+
         this.content_card_array = [];
     }
 
-    append_content(content_id, content){
-        //target content for content to be appended to
-        const target_content = document.getElementById(content_id)
+    append_content(content){
+
+        const target_content = document.getElementById(this.master_location)
+        const target_content2 = document.getElementById("placeholder2")
+        this.child.appendChild(content)
+
         this.content_card_array.push(content)
-        target_content.appendChild(content)
+        target_content.appendChild(this.child)
+        target_content2.appendChild(this.child)
     }
     
     remove_content(content_id, content){
@@ -58,18 +61,19 @@ class Collection_content_card{
 
 window.onload = winInit;
 function winInit() {
-    const test_collection_cards = new Collection_content_card("placeholder", "collection")
+    const test_collection_cards = new Collection_content_card( "placeholder", "placeholder_child")
+    
     const test_card = new Content_card("test_card_id")
-    // test_card.create_content_card()
-    test_card.add_div("test_card_id", "test_div")
-    test_collection_cards.append_content("test_card", test_card)
-    console.log(test_collection_cards)
+    test_card.add_div(test_card.card, "test_div")
+
+    const add_button = document.getElementById("add_task")
+
+    add_button.addEventListener("click", function() {
+        
+        test_collection_cards.append_content(test_card.card)}
+    
+        
+    )
+
+    // test_collection_cards.append_content(test_card.card)
 }
-
-
-// const skip_sang_knapp = document.createElement("button")
-// const skip_sang_bilde = document.createElement("img");
-// skip_sang_bilde.src = "./bilder/next_track_button_larger.png"
-// skip_sang_bilde.id = ("skip_sang_bilde");
-// skip_sang_knapp.removeChild(skip_sang_bilde); 
-// skip_sang_knapp.addEventListener('click', () => {})
