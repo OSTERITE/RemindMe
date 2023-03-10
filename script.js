@@ -83,3 +83,37 @@ function winInit() {
 
     })
 }
+
+
+let image_input = document.getElementById("image_input");
+var uploaded_image =""
+
+
+image_input.addEventListener("change", function() {
+
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+        uploaded_image = reader.result;
+        document.querySelector("#placeholder").style.backgroundImage = `url(${uploaded_image})`
+    })
+    reader.readAsDataURL(this.files[0]);
+});
+
+function load_image(image_input){
+    var file = image_input.files[0];
+    var reader = new FileReader();
+    
+    let image
+
+    reader.onload = function(e) {
+      image = new Image();
+      image.src = e.target.result;
+      console.log(image)
+    return image
+    };
+    reader.readAsDataURL(file);
+    
+    // return file
+}
+
+
