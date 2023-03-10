@@ -2,11 +2,10 @@
 
 class Content_card{
 
-    constructor(card_id){
+    constructor(card_class){
         //TODO: content of card can be stored in card?
-        this.card = document.createElement("div")
-        this.card.classList = card_id
-        console.log(this.card, 'hjei')
+        this.card = document.createDocumentFragment()
+        this.card.classList = card_class
     }
 
     create_content_card(){
@@ -19,11 +18,16 @@ class Content_card{
         const div = document.createElement('div')
         div.id = div_id
 
-        console.log(target_location, 'hade')
         target_location.appendChild(div)
     }
 
-    add_paragraph(target_location){}
+    add_paragraph(target_location, paragraph_id, paragraph_text){
+        const paragraph = document.createElement('p')
+        paragraph.id = paragraph_id
+        paragraph.textContent = paragraph_text
+
+        target_location.appendChild(paragraph)
+    }
 
     add_button(target_location, action){}
 
@@ -32,22 +36,24 @@ class Content_card{
 class Collection_content_card{
 
     constructor(master_location, children_class){
+        // master location is the location where all the cards will be stored
         this.master_location = master_location
-        this.child = document.createElement('div')
-        this.child.classList = children_class
+        this.children_class = children_class
 
         this.content_card_array = [];
     }
 
     append_content(content){
 
-        const target_content = document.getElementById(this.master_location)
-        const target_content2 = document.getElementById("placeholder2")
-        this.child.appendChild(content)
+        const child = document.createElement("div")
+        child.classList = this.children_class
 
-        this.content_card_array.push(content)
-        target_content.appendChild(this.child)
-        target_content2.appendChild(this.child)
+        const target_content = document.getElementById(this.master_location)
+        console.log(target_content)
+        child.appendChild(content)
+
+        this.content_card_array.push(child)
+        target_content.appendChild(child)
     }
     
     remove_content(content_id, content){
@@ -58,22 +64,22 @@ class Collection_content_card{
 }
 //a button which when pressed creates content(an element or whatever) in a specified location
 
+const add_task_button = document.getElementById("add_task")
 
 window.onload = winInit;
 function winInit() {
     const test_collection_cards = new Collection_content_card( "placeholder", "placeholder_child")
     
-    const test_card = new Content_card("test_card_id")
-    test_card.add_div(test_card.card, "test_div")
+    add_task_button.addEventListener("click", function(){
 
-    const add_button = document.getElementById("add_task")
+        const task_name = document.getElementById("task_name_input").value
 
-    add_button.addEventListener("click", function() {
-        
-        test_collection_cards.append_content(test_card.card)}
+
+        const test_card = new Content_card("test_card_id")
+        test_card.add_div(test_card.card, "test_div")
+        test_card.add_paragraph(test_card.card, task_name, task_name)
     
-        
-    )
+        test_collection_cards.append_content(test_card.card)
 
-    // test_collection_cards.append_content(test_card.card)
+    })
 }
