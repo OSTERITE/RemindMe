@@ -87,33 +87,27 @@ function winInit() {
 
 let image_input = document.getElementById("image_input");
 var uploaded_image =""
-
+let image_array = []
 
 image_input.addEventListener("change", function() {
-
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        uploaded_image = reader.result;
-        document.querySelector("#placeholder").style.backgroundImage = `url(${uploaded_image})`
-    })
-    reader.readAsDataURL(this.files[0]);
+    read_image(image_input, push_to_image_array, image_array)
 });
 
-function load_image(image_input){
-    var file = image_input.files[0];
-    var reader = new FileReader();
-    
-    let image
 
-    reader.onload = function(e) {
-      image = new Image();
-      image.src = e.target.result;
-      console.log(image)
-    return image
-    };
-    reader.readAsDataURL(file);
-    
-    // return file
+
+
+
+function push_to_image_array(image, array){    // Behandler CSV-data
+    array.push(image)
 }
 
-
+function read_image(image_input,callback, array){ // Leser fil basert på popup-dialog (fra HTML Input tag type 'file')
+    console.log(image_input.files[0])
+	var file   = image_input.files[0];
+	var reader = new FileReader();
+	reader.onload = function(evt) {
+					var fileContent = evt.target.result;
+					callback(fileContent, array);
+				    };
+    reader.readAsDataURL(file);
+}
