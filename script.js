@@ -12,9 +12,16 @@ class Content_card{
         this.location_element.appendChild(this.card)
     }
 
-    add_image(target_location){}
+    add_image(target_location, img_id, img_src){
+        const img = document.createElement('img')
+        img.id = img_id
+        img.src = img_src
+
+        target_location.appendChild(img)
+    }
 
     add_div(target_location, div_id){
+
         const div = document.createElement('div')
         div.id = div_id
 
@@ -70,7 +77,16 @@ window.onload = winInit;
 function winInit() {
     const test_collection_cards = new Collection_content_card( "placeholder", "placeholder_child")
     
-    add_task_button.addEventListener("click", function(){
+    add_task_button.addEventListener("click", async function(){
+        console.log('her')
+
+        // await read_image(image_input, push_to_image_array, image_array)
+        
+        // const image_data = await new Promise((resolve, reject) => {
+        //     read_image(image_input, push_to_image_array, image_array, function(data) {
+        //         resolve(data);
+        //     });
+        // });
 
         const task_name = document.getElementById("task_name_input").value
 
@@ -78,6 +94,10 @@ function winInit() {
         const test_card = new Content_card("test_card_id")
         test_card.add_div(test_card.card, "test_div")
         test_card.add_paragraph(test_card.card, task_name, task_name)
+        
+        console.log(image_array)
+        
+        test_card.add_image(test_card.card, "test_img", image_array[image_array.length-1])
     
         test_collection_cards.append_content(test_card.card)
 
@@ -89,6 +109,13 @@ let image_input = document.getElementById("image_input");
 var uploaded_image =""
 let image_array = []
 
+//TODO: image is added to image_array, then it is added to a file when the + button is clicked. 
+//When a task is removed, the image in the images file is also removed
+
+
+
+
+
 image_input.addEventListener("change", function() {
     read_image(image_input, push_to_image_array, image_array)
 });
@@ -99,10 +126,10 @@ image_input.addEventListener("change", function() {
 
 function push_to_image_array(image, array){    // Behandler CSV-data
     array.push(image)
+    console.log(array)
 }
 
 function read_image(image_input,callback, array){ // Leser fil basert på popup-dialog (fra HTML Input tag type 'file')
-    console.log(image_input.files[0])
 	var file   = image_input.files[0];
 	var reader = new FileReader();
 	reader.onload = function(evt) {
