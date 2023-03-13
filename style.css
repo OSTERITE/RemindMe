@@ -5,11 +5,9 @@
 }
 
 .placeholder_child{
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 180px;
     border: 3px solid green;
-
-
 }
 
 #test_div{

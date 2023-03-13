@@ -12,10 +12,14 @@ class Content_card{
         this.location_element.appendChild(this.card)
     }
 
-    add_image(target_location, img_id, img_src){
+    add_image(target_location, img_id, img_src, size){
         const img = document.createElement('img')
         img.id = img_id
         img.src = img_src
+        img.width = `${size}`
+        img.height = `${size}`
+        console.log(img)
+        console.log(target_location)
 
         target_location.appendChild(img)
     }
@@ -97,7 +101,7 @@ function winInit() {
         
         console.log(image_array)
         
-        test_card.add_image(test_card.card, "test_img", image_array[image_array.length-1])
+        test_card.add_image(test_card.card, "test_img", image_array[image_array.length-1], 100)
     
         test_collection_cards.append_content(test_card.card)
 
