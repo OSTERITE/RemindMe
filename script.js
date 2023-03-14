@@ -18,8 +18,6 @@ class Content_card{
         img.src = img_src
         img.width = `${size}`
         img.height = `${size}`
-        console.log(img)
-        console.log(target_location)
 
         target_location.appendChild(img)
     }
@@ -43,6 +41,7 @@ class Content_card{
     add_button(target_location, action){}
 
 }
+
 
 class Collection_content_card{
 
@@ -82,15 +81,6 @@ function winInit() {
     const test_collection_cards = new Collection_content_card( "placeholder", "placeholder_child")
     
     add_task_button.addEventListener("click", async function(){
-        console.log('her')
-
-        // await read_image(image_input, push_to_image_array, image_array)
-        
-        // const image_data = await new Promise((resolve, reject) => {
-        //     read_image(image_input, push_to_image_array, image_array, function(data) {
-        //         resolve(data);
-        //     });
-        // });
 
         const task_name = document.getElementById("task_name_input").value
 
@@ -99,7 +89,6 @@ function winInit() {
         test_card.add_div(test_card.card, "test_div")
         test_card.add_paragraph(test_card.card, task_name, task_name)
         
-        console.log(image_array)
         
         test_card.add_image(test_card.card, "test_img", image_array[image_array.length-1], 100)
     
@@ -110,7 +99,7 @@ function winInit() {
 
 
 let image_input = document.getElementById("image_input");
-var uploaded_image =""
+let uploaded_image =""
 let image_array = []
 
 //TODO: image is added to image_array, then it is added to a file when the + button is clicked. 
@@ -134,10 +123,10 @@ function push_to_image_array(image, array){    // Behandler CSV-data
 }
 
 function read_image(image_input,callback, array){ // Leser fil basert på popup-dialog (fra HTML Input tag type 'file')
-	var file   = image_input.files[0];
-	var reader = new FileReader();
+	let file   = image_input.files[0];
+	let reader = new FileReader();
 	reader.onload = function(evt) {
-					var fileContent = evt.target.result;
+					let fileContent = evt.target.result;
 					callback(fileContent, array);
 				    };
     reader.readAsDataURL(file);
